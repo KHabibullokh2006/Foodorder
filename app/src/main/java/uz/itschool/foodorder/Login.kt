@@ -11,6 +11,9 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class Login : AppCompatActivity() {
+
+    var status:Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -21,32 +24,34 @@ class Login : AppCompatActivity() {
         val password: TextInputEditText = findViewById(R.id.password)
         var forgot: Button = findViewById(R.id.forgotpassword)
 
-        var userList: MutableList<User>
-        val shared = getSharedPreferences("login", MODE_PRIVATE)
-        val gson = Gson()
-        val convert = object : TypeToken<List<User>>(){}.type
-        val users = shared.getString("users","")
-
-        signUp.setOnClickListener {
-            val intent = Intent(this,Registration::class.java)
-            startActivity(intent)
-        }
-
-        signIn.setOnClickListener {
-            userList = gson.fromJson(users,convert)
-            if (users==""){
-                Toast.makeText(this,"Register", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                for (user in userList) {
-                    if (username.text.toString() == user.username && password.text.toString() == user.password){
-                        Log.d("ABC", username.toString())
-                        val intent = Intent(this,MainActivity::class.java)
-                        intent.putExtra("name",username.text.toString())
-                        startActivity(intent)
-                    }
-                }
-            }
-        }
+//        var userList: MutableList<User>
+//        val shared = getSharedPreferences("login", MODE_PRIVATE)
+//        val gson = Gson()
+//        val convert = object : TypeToken<List<User>>(){}.type
+//        val users = shared.getString("users","")
+//
+//        signUp.setOnClickListener {
+//            val intent = Intent(this,Registration::class.java)
+//            startActivity(intent)
+//        }
+//
+//        signIn.setOnClickListener {
+//            userList = gson.fromJson(users,convert)
+//            if (users==""){
+//                Toast.makeText(this,"Register", Toast.LENGTH_SHORT).show()
+//            }
+//            else{
+//                for (user in userList) {
+//                    if (username.text.toString() == user.username && password.text.toString() == user.password){
+//                        Log.d("ABC", username.toString())
+//                        status = true
+//                        val intent = Intent(this,MainActivity::class.java)
+//                        intent.putExtra("name",username.text.toString())
+//                        intent.putExtra("status",status)
+//                        startActivity(intent)
+//                    }
+//                }
+//            }
+//        }
     }
 }
