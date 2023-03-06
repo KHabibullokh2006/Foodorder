@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import uz.itschool.foodorder.template.User
 
 class Login : AppCompatActivity() {
 
