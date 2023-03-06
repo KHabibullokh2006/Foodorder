@@ -8,6 +8,9 @@ import android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class Splash : AppCompatActivity() {
 
@@ -28,12 +31,24 @@ class Splash : AppCompatActivity() {
         img.startAnimation(anim_img)
         tv.startAnimation(anim_text)
 
+        val shared = getSharedPreferences("login", MODE_PRIVATE)
+        val users = shared.getString("users","")
 
         val handler = Handler()
-        handler.postDelayed({
-            val intent = Intent(this,Login::class.java)
-            startActivity(intent)
-        },splashtime)
+
+        if (users == ""){
+            handler.postDelayed({
+                val intent = Intent(this,Registration::class.java)
+                startActivity(intent)
+            },splashtime)
+        }
+        else{
+            handler.postDelayed({
+                val intent = Intent(this,Login::class.java)
+                startActivity(intent)
+            },splashtime)
+        }
+
 
 
     }
