@@ -32,86 +32,85 @@
         app:layout_constraintTop_toBottomOf="@+id/text"
         android:orientation="vertical">
 
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Full Name"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/name"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:inputType="textPersonName"/>-->
-
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Username"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/username"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:inputType="text"/>-->
-
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Phone Number"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/phone"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:inputType="phone"/>-->
-
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
-
-
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Password"-->
-<!--            app:passwordToggleEnabled="true"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/password"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:inputType="textPassword"/>-->
-
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Repeat Password"-->
-<!--            app:passwordToggleEnabled="true"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/rep_password"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:inputType="textPassword"/>-->
-
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
-
-        <Spinner
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="@array/languages"/>
+            android:hint="Full Name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Repeat Password"
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/rep_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <Spinner-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:elevation="@array/languages"/>-->
 
         <Button
             android:id="@+id/signup_reg"

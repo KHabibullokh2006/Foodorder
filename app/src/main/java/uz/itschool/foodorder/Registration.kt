@@ -25,47 +25,68 @@ class Registration : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
-//        initUI()
+        initUI()
 
-//        val shared: SharedPreferences = getSharedPreferences("login", MODE_PRIVATE)
-//        val edit = shared.edit()
-//        val gson = Gson()
-//        val convert = object : TypeToken<List<User>>(){}.type
-//
-//        reg.setOnClickListener {
-//            if (validate()){
-//                val users = shared.getString("users","")
-//                userList = if (users==""){
-//                    mutableListOf()
-//                } else{
-//                    gson.fromJson(users,convert)
-//                }
-//
-//                userList.add(User(name.text.toString(),username.text.toString(),phone.text.toString(),password.text.toString()))
-//
-//                val str = gson.toJson(userList)
-//                edit.putString("users", str).apply()
-//
-//                val intent = Intent(this,Login::class.java)
-//                startActivity(intent)
-//            }
-//            if (!validate()){
-//                Toast.makeText(this,"Something went wrong", Toast.LENGTH_SHORT).show()
-//            }
-//        }
+        val shared: SharedPreferences = getSharedPreferences("login", MODE_PRIVATE)
+        val edit = shared.edit()
+        val gson = Gson()
+        val convert = object : TypeToken<List<User>>(){}.type
+
+        reg.setOnClickListener {
+            if (validate()) {
+                val users = shared.getString("users", "")
+
+                if (users == "") {
+                    userList = mutableListOf()
+                } else {
+                    userList = gson.fromJson(users, convert)
+
+                }
+
+                userList.add(
+                    User(
+                        name.text.toString(),
+                        username.text.toString(),
+                        phone.text.toString(),
+                        password.text.toString()
+                    )
+                )
+
+                val str = gson.toJson(userList)
+                edit.putString("users", str).apply()
+
+                val intent = Intent(this, Login::class.java)
+                startActivity(intent)
+            }
+            if (!validate()){
+                Toast.makeText(this,"Something went wrong", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     }
 
-//    private fun initUI(){
-//        reg = findViewById(R.id.signup_reg)
-//        name = findViewById(R.id.name)
-//        username = findViewById(R.id.username)
-//        phone = findViewById(R.id.phone)
-//        password = findViewById(R.id.password)
-//        rep_password = findViewById(R.id.rep_password)
-//    }
+    private fun initUI(){
+        reg = findViewById(R.id.signup_reg)
+        name = findViewById(R.id.name)
+        username = findViewById(R.id.username)
+        phone = findViewById(R.id.phone)
+        password = findViewById(R.id.password)
+        rep_password = findViewById(R.id.rep_password)
+    }
 
     private fun validate():Boolean{
+        val shared: SharedPreferences = getSharedPreferences("login", MODE_PRIVATE)
+        val gson = Gson()
+        val convert = object : TypeToken<List<User>>(){}.type
+
+        val users = shared.getString("users","")
+
+        if (users == ""){
+            userList = mutableListOf()
+        } else{
+            userList = gson.fromJson(users,convert)
+        }
+
         if(name.text.toString() == "" || username.text.toString() == "" || phone.text.toString() == "" || password.text.toString() == "" || rep_password.text.toString() == ""){
             Toast.makeText(this,"Fill the form fully", Toast.LENGTH_SHORT).show()
             return false

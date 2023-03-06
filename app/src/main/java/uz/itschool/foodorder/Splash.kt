@@ -28,12 +28,10 @@ class Splash : AppCompatActivity() {
         img.startAnimation(anim_img)
         tv.startAnimation(anim_text)
 
-//        var status:Boolean = intent.getBooleanExtra("status",)
 
         val handler = Handler()
         handler.postDelayed({
-
-            val intent = Intent(this,Registration::class.java)
+            val intent = Intent(this,Login::class.java)
             startActivity(intent)
         },splashtime)
 
