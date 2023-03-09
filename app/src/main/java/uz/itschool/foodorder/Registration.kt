@@ -4,12 +4,15 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import uz.itschool.foodorder.template.User
+import java.util.*
 
 class Registration : AppCompatActivity() {
 
@@ -19,18 +22,33 @@ class Registration : AppCompatActivity() {
     lateinit var phone: TextInputEditText
     lateinit var password: TextInputEditText
     lateinit var rep_password: TextInputEditText
+    lateinit var spinner: Spinner
 
-    private lateinit var userList:MutableList<User>
+    private lateinit var userList: MutableList<User>
+
+    lateinit var locale: Locale
+    private var currentLanguage = "en"
+    private var currentLang: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
         initUI()
 
+        var list = mutableListOf<String>()
+
+        list.add("Select Language")
+        list.add("English")
+        list.add("Uzbek")
+
+        var adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list)
+
+        spinner.adapter = adapter
+
         val shared: SharedPreferences = getSharedPreferences("login", MODE_PRIVATE)
         val edit = shared.edit()
         val gson = Gson()
-        val convert = object : TypeToken<List<User>>(){}.type
+        val convert = object : TypeToken<List<User>>() {}.type
 
         reg.setOnClickListener {
             if (validate()) {
@@ -58,47 +76,52 @@ class Registration : AppCompatActivity() {
                 val intent = Intent(this, Login::class.java)
                 startActivity(intent)
             }
-            if (!validate()){
-                Toast.makeText(this,"Something went wrong", Toast.LENGTH_SHORT).show()
+            if (!validate()) {
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
             }
         }
 
     }
 
-    private fun initUI(){
+    private fun initUI() {
         reg = findViewById(R.id.signup_reg)
         name = findViewById(R.id.name)
         username = findViewById(R.id.username)
         phone = findViewById(R.id.phone)
         password = findViewById(R.id.password)
         rep_password = findViewById(R.id.rep_password)
+        spinner = findViewById(R.id.spinner)
     }
 
-    private fun validate():Boolean{
+    private fun validate(): Boolean {
         val shared: SharedPreferences = getSharedPreferences("login", MODE_PRIVATE)
         val gson = Gson()
-        val convert = object : TypeToken<List<User>>(){}.type
+        val convert = object : TypeToken<List<User>>() {}.type
 
-        val users = shared.getString("users","")
+        val users = shared.getString("users", "")
 
-        if (users == ""){
+        if (users == "") {
             userList = mutableListOf()
-        } else{
-            userList = gson.fromJson(users,convert)
+        } else {
+            userList = gson.fromJson(users, convert)
         }
 
-        if(name.text.toString() == "" || username.text.toString() == "" || phone.text.toString() == "" || password.text.toString() == "" || rep_password.text.toString() == ""){
-            Toast.makeText(this,"Fill the form fully", Toast.LENGTH_SHORT).show()
+        if (name.text.toString() == "" || username.text.toString() == "" || phone.text.toString() == "" || password.text.toString() == "" || rep_password.text.toString() == "") {
+            Toast.makeText(this, "Fill the form fully", Toast.LENGTH_SHORT).show()
             return false
 
         }
-        if (password.text.toString() != rep_password.text.toString()){
-            Toast.makeText(this,"Repeat password",Toast.LENGTH_SHORT).show()
+        if (password.text.toString() != rep_password.text.toString()) {
+            Toast.makeText(this, "Repeat password", Toast.LENGTH_SHORT).show()
             return false
         }
-        for (i in userList.indices){
-            if (username.text.toString() == userList[i].username){
-                Toast.makeText(this,"User with this username already registered", Toast.LENGTH_SHORT).show()
+        for (i in userList.indices) {
+            if (username.text.toString() == userList[i].username) {
+                Toast.makeText(
+                    this,
+                    "User with this username already registered",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return false
             }
         }

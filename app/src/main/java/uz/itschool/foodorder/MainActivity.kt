@@ -6,11 +6,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Layout
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import uz.itschool.foodorder.adapter.ItemAdapter
 import uz.itschool.foodorder.adapter.ProductAdapter
 import uz.itschool.foodorder.databinding.ActivityMainBinding
+import uz.itschool.foodorder.menu.SettingsActivity
 import uz.itschool.foodorder.template.Item
 import uz.itschool.foodorder.template.Product
 
@@ -24,6 +26,11 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        var home:TextView = findViewById(R.id.home)
+        var cart:TextView = findViewById(R.id.cart)
+        var profile:TextView = findViewById(R.id.profile)
+        var settings:TextView = findViewById(R.id.settings)
 
         val name = intent.getStringExtra("name")
         binding.name.text = "Welcome, $name"
@@ -68,21 +75,33 @@ class MainActivity : AppCompatActivity() {
         binding.itemRv.adapter = item_adapter
         binding.itemRv.layoutManager = layoutManager
 
-        val pro_adapter = ProductAdapter(productList)
+        val pro_adapter = ProductAdapter(productList,object : ProductAdapter.ProductInterface{
+            override fun onClick(product: Product) {
+                var intent = Intent(this@MainActivity,OverviewActivity::class.java)
+                intent.putExtra("img",product.pro_img)
+                intent.putExtra("name",product.pro_name)
+                intent.putExtra("img",product.pro_img)
+
+            }
+
+        })
         var proManager = GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false)
         binding.productRv.adapter = pro_adapter
         binding.productRv.layoutManager = proManager
 
-//        binding.bottomNav.setOnItemSelectedListener {
-//            when(it.itemId){
-//                R.id.settings -> replaceLayout(SettingsActivity)
-//            }
-//        }
+        home.setOnClickListener {
+            var intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        settings.setOnClickListener {
+            var intent = Intent(this,SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
     }
 
-//    fun replaceLayout(activity:Activity){
-//        val intent = Intent(this,activity::class.java)
-//        startActivity(intent)
-//    }
+
 }
