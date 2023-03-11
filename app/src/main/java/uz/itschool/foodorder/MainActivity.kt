@@ -89,7 +89,8 @@ class MainActivity : AppCompatActivity() {
                 var intent = Intent(this@MainActivity,OverviewActivity::class.java)
                 intent.putExtra("img",product.pro_img)
                 intent.putExtra("name",product.pro_name)
-                intent.putExtra("img",product.pro_img)
+                intent.putExtra("desc",product.pro_desc)
+                intent.putExtra("price",product.pro_price)
 
             }
 
