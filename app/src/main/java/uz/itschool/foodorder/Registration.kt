@@ -34,6 +34,8 @@ class Registration : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
         initUI()
+        
+        currentLanguage = intent.getStringExtra(currentLang).toString()
 
         var list = mutableListOf<String>()
 
@@ -41,9 +43,20 @@ class Registration : AppCompatActivity() {
         list.add("English")
         list.add("Uzbek")
 
-        var adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list)
-
-        spinner.adapter = adapter
+        val adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, list)
+      adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+      spinner.adapter = adapter
+      spinner.onItemSelectedListener = object : OnItemSelectedListener {
+         override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            when (position) {
+               0 -> {
+               }
+               1 -> setLocale("en")
+               2 -> setLocale("uz")
+            }
+         }
+         override fun onNothingSelected(parent: AdapterView<*>) {}
+      }
 
         val shared: SharedPreferences = getSharedPreferences("login", MODE_PRIVATE)
         val edit = shared.edit()
@@ -92,6 +105,26 @@ class Registration : AppCompatActivity() {
         rep_password = findViewById(R.id.rep_password)
         spinner = findViewById(R.id.spinner)
     }
+    
+    private fun setLocale(localeName: String) {
+      if (localeName != currentLanguage) {
+         locale = Locale(localeName)
+         val res = resources
+         val dm = res.displayMetrics
+         val conf = res.configuration
+         conf.locale = locale
+         res.updateConfiguration(conf, dm)
+         val refresh = Intent(
+            this,
+            MainActivity::class.java
+         )
+         refresh.putExtra(currentLang, localeName)
+         startActivity(refresh)
+      } else {
+         Toast.makeText(
+         this@MainActivity, "Language, , already, , selected)!", Toast.LENGTH_SHORT).show();
+      }
+   }
 
     private fun validate(): Boolean {
         val shared: SharedPreferences = getSharedPreferences("login", MODE_PRIVATE)
