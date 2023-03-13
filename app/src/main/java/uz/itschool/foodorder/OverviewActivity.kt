@@ -2,6 +2,8 @@ package uz.itschool.foodorder
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import coil.load
 import uz.itschool.foodorder.databinding.ActivityOverviewBinding
 
 class OverviewActivity : AppCompatActivity() {
@@ -16,9 +18,10 @@ class OverviewActivity : AppCompatActivity() {
         var price = intent.getStringExtra("price")
         
         binding.img.load(img)
-        binding.product_name.text = name
-        binding.product_desc.text = desc
-        binding.product_price.text = price
+        binding.productName.text = name
+        binding.productDesc.text = desc
+        binding.productPrice.text = price
+
         
         binding.button.setOnClickListener{
             Toast.makeText(this, "Meal was added to cart", Toast.LENGTH_SHORT).show();

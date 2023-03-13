@@ -4,10 +4,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -43,10 +41,10 @@ class Registration : AppCompatActivity() {
         list.add("English")
         list.add("Uzbek")
 
-        val adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, list)
-      adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val adapter = ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,list)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
       spinner.adapter = adapter
-      spinner.onItemSelectedListener = object : OnItemSelectedListener {
+      spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
          override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
             when (position) {
                0 -> {
@@ -122,7 +120,7 @@ class Registration : AppCompatActivity() {
          startActivity(refresh)
       } else {
          Toast.makeText(
-         this@MainActivity, "Language, , already, , selected)!", Toast.LENGTH_SHORT).show();
+         this, "Language, , already, , selected)!", Toast.LENGTH_SHORT).show();
       }
    }
 

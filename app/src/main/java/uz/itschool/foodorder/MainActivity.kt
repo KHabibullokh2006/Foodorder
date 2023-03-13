@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Layout
 import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import uz.itschool.foodorder.adapter.ItemAdapter
@@ -18,7 +19,7 @@ import uz.itschool.foodorder.template.Product
 
 class MainActivity : AppCompatActivity() {
 
-     var itemList = mutableListOf<Item>()
+    var itemList = mutableListOf<Item>()
     var productList = mutableListOf<Product>()
 
     @SuppressLint("SetTextI18n")
@@ -34,36 +35,34 @@ class MainActivity : AppCompatActivity() {
 
         val name = intent.getStringExtra("name")
         binding.name.text = "Welcome, $name"
-         
-         binding.search.addTextChangedListener {
-            var filter = mutableListOf<Country>()
-            if (it != null) {
-                for (i in productList) {
-                    if (i.name.contains(it.toString())) {
+
+        binding.search.addTextChangedListener {
+            var filter = mutableListOf<Product>()
+            if (it != null){
+                for (i in productList){
+                    if (i.pro_name.contains(it.toString())){
                         filter.add(i)
                     }
                 }
-                val pro_adapter = ProductAdapter(filter,object : ProductAdapter.ProductInterface{
-            override fun onClick(product: Product) {
-                var intent = Intent(this@MainActivity,OverviewActivity::class.java)
-                intent.putExtra("img",product.pro_img)
-                intent.putExtra("name",product.pro_name)
-                intent.putExtra("img",product.pro_img)
-
+//                var pro_adapter = ProductAdapter(filter,object : ProductAdapter.ProductInterface{
+//                    override fun onClick(product: Product) {
+//                        var intent = Intent(this@MainActivity,OverviewActivity::class.java)
+//                        intent.putExtra("img",product.pro_img)
+//                        intent.putExtra("name",product.pro_name)
+//                        intent.putExtra("img",product.pro_img)
+//                        intent.putExtra("price",product.pro_price)
+//                    }
+//
+//                })
             }
-
-        })
-        var proManager = GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false)
-        binding.productRv.adapter = pro_adapter
-        binding.productRv.layoutManager = proManager
-            }
+        }
 
 
         itemList.add(Item("Burger", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSohV8qyF_DsTe3OZjCEwZz_qyHc7izOHRuAQ&usqp=CAU"))
         itemList.add(Item("Pizza", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_AMpVD3wJVOQ7GUdw4kURtJZmPEYROAtFiw&usqp=CAU"))
         itemList.add(Item("Hotdog", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROSXAE64Yrktw2UA2Nzz6-lTqkHWiEK-SCDw&usqp=CAU"))
 
-        productList.add(Product("БИГ САНДЕРС БУРГЕР","","34000","https://kfc.com.uz/admin/files/5122.jpg"))
+        productList.add(Product("БИГ САНДЕРС БУРГЕР","Burger","34000","https://kfc.com.uz/admin/files/5122.jpg"))
         productList.add(Product("БИГ САНДЕРС БУРГЕР ОСТРЫЙ","","34000","https://kfc.com.uz/admin/files/5122.jpg"))
         productList.add(Product("САНДЕРС БУРГЕР","","28000","https://kfc.com.uz/admin/files/5121.jpg"))
         productList.add(Product("САНДЕРС БУРГЕР ОСТРЫЙ","","28000","https://kfc.com.uz/admin/files/5121.jpg"))
@@ -77,10 +76,10 @@ class MainActivity : AppCompatActivity() {
         productList.add(Product("БАЙРАМ","","64000","https://api.choparpizza.uz/storage/products/2022/03/03/dXbMedBpXqHZxCOOlQl58wp5R1zPA1X11YH74sTw.webp"))
         productList.add(Product("ПЕППЕРОНИ","","64000","https://api.choparpizza.uz/storage/products/2022/03/03/wXNMPeUybWjgBUCTuIir8yfRv3L1ZmN4fqheRJwQ.webp"))
         productList.add(Product("CHOPAR SPECIAL","","99000","https://api.choparpizza.uz/storage/products/2022/06/27/IG4VTMiYdhGr0aDj2TuOouyR2jykDJwJZ4W6woJm.webp"))
-        
+
 
         val item_adapter = ItemAdapter(itemList)
-        var layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
         binding.itemRv.adapter = item_adapter
         binding.itemRv.layoutManager = layoutManager
 
@@ -91,13 +90,16 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("name",product.pro_name)
                 intent.putExtra("desc",product.pro_desc)
                 intent.putExtra("price",product.pro_price)
+                startActivity(intent)
 
             }
 
         })
+
         var proManager = GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false)
         binding.productRv.adapter = pro_adapter
         binding.productRv.layoutManager = proManager
+
 
         home.setOnClickListener {
             var intent = Intent(this,MainActivity::class.java)
@@ -110,8 +112,8 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        }
+
 
     }
 
-
-}
